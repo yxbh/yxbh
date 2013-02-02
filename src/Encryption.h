@@ -8,19 +8,21 @@
 #ifndef ENCRYPTION_H
 #define ENCRYPTION_H
 #include <cstdlib>
-#include <QString>
+#include <string>
+#include <string>
+using std::string;
 
 class Encryption
 {
 private:
       unsigned int m_key;
-     mutable  QString m_buf;
+     //mutable  string m_buf;
 
 public:
       Encryption();
 
-      QString shift(const QString & text, const unsigned key);
-      QString unshift(const QString & text) const;
+      string shift(const string & text, const unsigned key);
+      string unshift(const string & text) const;
 };
 
 #endif // ENCRYPTION_H
