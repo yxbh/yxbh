@@ -93,9 +93,17 @@ string Encryption::permute(const string &str)
       return str; // TODO : implementation
 }
 
+QString Encryption::permute(const QString &str)
+{
+      return QString(permute(str.toStdString()).c_str());
+}
+
 string Encryption::unpermute(const string & str)
 {
       return str; // TODO : implementation
 }
 
-
+QString Encryption::unpermute(const QString & str)
+{
+      return QString(unpermute(str.toStdString()).c_str());
+}

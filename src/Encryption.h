@@ -30,8 +30,12 @@ private:
       // opposite of shift(%)
       string unshift(const string & text) const;
       QString unshift(const QString & text) const;
+      // permutation the order of the chars
       string permute(const string & str);
+      QString permute(const QString & str);
+      // oppsoite of permute(%)
       string unpermute(const string & str);
+      QString unpermute(const QString & str);
 
 public:
       Encryption(unsigned short key, string & opseq , unsigned short charsiz = 0);
