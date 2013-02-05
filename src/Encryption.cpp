@@ -1,10 +1,13 @@
 #include "Encryption.h"
-#include <QDebug>
+#include <QDebug> // DEBUG
 
 Encryption::Encryption(unsigned short key, string & opseq, unsigned short charsiz)
-      : m_Key(key), m_OpSequence(opseq), m_CharSetSize(charsiz)
-{
-}
+      : m_Key(key), m_OpSequence(opseq), m_CharSetSize(charsiz), m_Perm(0)
+{}
+
+Encryption::Encryption(unsigned short key, QString & opseq, unsigned short charsiz)
+: m_Key(key), m_OpSequence(opseq.toStdString()), m_CharSetSize(charsiz)
+{}
 
 string Encryption::encrypt(const string & str)
 {
@@ -101,7 +104,8 @@ string Encryption::permute(const string & str)
       do // for str_len times
       {
             ++perm_c;  // range starts from 1, NOT 0.
-            i1 = rand() % str_len; i2 = rand()  % str_len; // generate 2 random indexs
+            i1 = rand() % str_len; i2 = rand()  % str_len;               // generate 2 random indexs
+            m_Perm.push_back(i1); m_Perm.push_back(i2);     // append to m_Perm
             // swap char
             c_buf = str_buf[i1];
             str_buf[i1]  = str_buf[i2];
@@ -123,17 +127,17 @@ string Encryption::unpermute(const string & str)
       string str_buf(str);
       const unsigned str_len = str.length();
 
-      vector<int> seq(0);
+      vector<int> m_Perm(0);
       const unsigned range = str_len * 2;
-      for (unsigned i = 0; i < range; ++i)  // get the seq used permutation
-            seq.push_back(rand() % str_len);
-
+      /*for (unsigned i = 0; i < range; ++i)  // get the m_Perm used permutation
+            m_Perm.push_back(rand() % str_len);
+*/
       char c_buf;
       for (int i = range -1; i > 0; i -= 2)
       {
-            c_buf = str_buf[seq[i]];
-            str_buf[seq[i]]  = str_buf[seq[i-1]];
-            str_buf[seq[i-1]] = c_buf;
+            c_buf = str_buf[m_Perm[i]];
+            str_buf[m_Perm[i]]  = str_buf[m_Perm[i-1]];
+            str_buf[m_Perm[i-1]] = c_buf;
             //qDebug() << QString(str_buf.c_str());
       }
       //qDebug() << QString(" DEBUG(file:%1, Linee:%2: unpermute completed").arg(__FILE__).arg(__LINE__) << endl;
