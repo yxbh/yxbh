@@ -6,26 +6,27 @@ Encryption::Encryption(unsigned short key, string & opseq, unsigned short charsi
 {
 }
 
-string Encryption::encrypt(const string &str)
+string Encryption::encrypt(const string & str)
 {
       int n = m_OpSequence.length();
-      qDebug() << "encrypt() string size = " << n << endl;
+      //qDebug() << " DEBUG: encrypt() string size = " << n << endl;
       string buf = str;
       for (int i  = 0; i <n; ++i)
       {
             switch(m_OpSequence[i])
             {
             case 'p':
-                  buf = permute(buf);
+                 buf = permute(buf);
                   break;
             case 's':
-                  buf = shift(buf, m_Key);
+                  //buf = shift(buf, m_Key);
                   break;
             default:
                   throw exception();
                   break;
             }
       }
+      //qDebug() << QString(" DEBUG(line%1): encrypt completed").arg(__LINE__) <<endl;
       return buf;
 }
 
@@ -33,7 +34,7 @@ string Encryption::decrypt(const string &str)
 {
       int n = m_OpSequence.length();
       string buf = str;
-      for (int i  = 0; i <n; ++i)
+      for (int i  = n - 1; i  >= 0; --i)
       {
             switch(m_OpSequence[i])
             {
@@ -41,7 +42,7 @@ string Encryption::decrypt(const string &str)
                   buf = unpermute(buf);
                   break;
             case 's':
-                  buf = unshift(buf);
+                  //buf = unshift(buf);
                   break;
             default:
                   throw exception();
@@ -88,9 +89,26 @@ QString Encryption::unshift(const QString & text) const
       return QString(unshift(text.toStdString()).c_str());
 }
 
-string Encryption::permute(const string &str)
+string Encryption::permute(const string & str)
 {
-      return str; // TODO : implementation
+      //qDebug() << QString(" DEBUG(file:%1, Linee:%2: permute begin").arg(__FILE__).arg(__LINE__) << endl;
+      srand(m_Key);
+      string str_buf(str);
+      int perm_c = 0;
+      const int str_len = str.length();
+      int i1, i2;
+      char c_buf;
+      do // for str_len times
+      {
+            ++perm_c;  // range starts from 1, NOT 0.
+            i1 = rand() % str_len; i2 = rand()  % str_len; // generate 2 random indexs
+            // swap char
+            c_buf = str_buf[i1];
+            str_buf[i1]  = str_buf[i2];
+            str_buf[i2] = c_buf;
+      }
+      while (perm_c < str_len);
+      return str_buf;
 }
 
 QString Encryption::permute(const QString &str)
@@ -100,7 +118,26 @@ QString Encryption::permute(const QString &str)
 
 string Encryption::unpermute(const string & str)
 {
-      return str; // TODO : implementation
+      //qDebug() << QString(" DEBUG(file:%1, Linee:%2: unpermute begin").arg(__FILE__).arg(__LINE__) << endl;
+      srand(m_Key);
+      string str_buf(str);
+      const unsigned str_len = str.length();
+
+      vector<int> seq(0);
+      const unsigned range = str_len * 2;
+      for (unsigned i = 0; i < range; ++i)  // get the seq used permutation
+            seq.push_back(rand() % str_len);
+
+      char c_buf;
+      for (int i = range -1; i > 0; i -= 2)
+      {
+            c_buf = str_buf[seq[i]];
+            str_buf[seq[i]]  = str_buf[seq[i-1]];
+            str_buf[seq[i-1]] = c_buf;
+            //qDebug() << QString(str_buf.c_str());
+      }
+      //qDebug() << QString(" DEBUG(file:%1, Linee:%2: unpermute completed").arg(__FILE__).arg(__LINE__) << endl;
+      return str_buf;
 }
 
 QString Encryption::unpermute(const QString & str)

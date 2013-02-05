@@ -1,13 +1,15 @@
-//================================================
+//======================================================
 //  Encryption class
 //          Author: YanXiang (Ben) Huang
 //          Date;       02/02/2013
 //
 //          A simple encryption class that uses cstdlib's random() and srandom()
-//================================================
+//          Base on exercises from "A Introduction to Design Patterns in C++ with Qt"
+//                - Exercise 5.12 (page 164 ~ ?)
+//======================================================
 #ifndef ENCRYPTION_H
 #define ENCRYPTION_H
-#include <cstdlib>
+#include <cstdlib>             // for rand() and srand()
 #include <string>
 using std::string;
 #include <QString>
