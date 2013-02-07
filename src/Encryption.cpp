@@ -65,7 +65,7 @@ string Encryption::shift(const string & text, const unsigned key)
 	int size = text.length();
 	for (int i = 0; i < size; i++)
 	{
-		m_buf += char((text[i] +rand()) % 128);
+		m_buf += char((text[i] +rand()) % m_CharSetSize);
 	}
 	return m_buf;
 }
@@ -82,8 +82,8 @@ string Encryption::unshift(const string & text) const
 	int size = text.length();
 	for (int i = 0; i < size; i++)
 	{
-		int val = (text[i] - rand()) % 128;
-		val = ( val < 0 ) ? (val + 128) : val;
+		int val = (text[i] - rand()) % m_CharSetSize;
+		val = ( val < 0 ) ? (val + m_CharSetSize) : val;
 		m_buf += char(val);
 	}
 	return m_buf;
