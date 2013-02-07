@@ -29,6 +29,9 @@ private:
 	unsigned short m_CharSetSize;
 	vector<int> m_Perm;                             // permutation seq
 
+private:  // private method
+	// generate m_Perm sequence
+	void gen_perm_seq(const unsigned str_len);
 	// shift each char via rand() after srand(key)
 	string shift(const string & text, const unsigned key);
 	// shift each char via rand() after srand(key), QString ver
@@ -37,13 +40,13 @@ private:
 	string unshift(const string & text) const;
 	// opposite of shift(%), QString ver
 	QString unshift(const QString & text) const;
-	// permutation the order of the chars
+	// permutate the order of the chars
 	string permute(const string & str);
-	// permutation the order of the chars, QString ver
+	// permutate the order of the chars, QString ver
 	QString permute(const QString & str);
-	// oppsoite of permute(%)
+	// revert permute(%)
 	string unpermute(const string & str);
-	// oppsoite of permute(%), QString ver
+	// revert permute(%), QString ver
 	QString unpermute(const QString & str);
 
 public:
