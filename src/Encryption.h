@@ -9,16 +9,16 @@
 //======================================================
 #ifndef ENCRYPTION_H
 #define ENCRYPTION_H
-#include <cstdlib>             // for rand() and srand()
+#include <cstdlib>		// for rand() and srand()
 #include <string>
 using std::string;
 #include <QString>
-#include <vector>
+#include <vector>		// for vector<int>
 using std::vector;
 #include <exception>
 using std::exception;
 // experimental
-#include <random>
+#include <random>		 // use a C++11 RNG
 // end experimental
 
 class Encryption
