@@ -1,50 +1,32 @@
 TEMPLATE = app
-
-
-
 QT += widgets
+CONFIG += console
 
 #CONFIG = console
 
-
 SOURCES += \
-
-    main.cpp \
-
-    Fraction.cpp
-
-
+    main.cpp
 
 HEADERS += \
+    includes.h
 
-    Fraction.h \
-
-    include.h
-
-
-
-QMAKE_CXXFLAGS
-
-
-win32-msvc2010
-
-{
-
-
+win32-msvc2010 {
     # Enable Level 4 compiler warning
-    QMAKE_CXXFLAGS_WARN_ON = -W4
-
+    QMAKE_CXXFLAGS_WARN_ON -= -W3
+    QMAKE_CXXFLAGS_WARN_ON += -W4
     # Treat warnings as errors
     QMAKE_CXXFLAGS_WARN_ON += -WX
-
     # Enable static (no DLL requirement)
     QMAKE_CXXFLAGS_RELEASE += -MT
-
-
-
     # Hush common known Qt warning
     # reference: http://qt-project.org/forums/viewthread/10527
     QMAKE_CXXFLAGS += -wd4127 -wd4512 -wd4189
-
+} else {
+    # enable all warnings
+    QMAKE_CXXFLAGS_WARN_ON += -Wall
+    # classify warning as errors
+    QMAKE_CXXFLAGS += -Werror
+    # pedantic
+    QMAKE_CXXFLAGS += -Pedantic
 }
 
