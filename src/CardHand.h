@@ -3,6 +3,7 @@
 #include <QString>
 #include <QList>
 #include "Card.h"
+#include <QDebug>
 
 class CardHand : public QList<Card>
 {

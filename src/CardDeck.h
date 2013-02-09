@@ -6,13 +6,16 @@
 #include "CardHand.h"
 #include <cstdlib>	// for srand() & rand()
 #include <ctime>		// for time()
+#include <QMessageBox>
+#include <exception>
+using std::exception;
 
 class CardDeck : public QList<Card>
 {
 private:
 
 public:
-	CardDeck() {}
+	CardDeck();
 
 	// using available cards, deal a hand. Create and returns a CardHand obj
 	CardHand deal(int handSize);

@@ -6,7 +6,7 @@ int CardHand::getValue(void)
 	int size = this->size();
 	for ( int i = 0; i < size; ++i)
 	{
-		val += this[i].getValue();
+		val += (*this)[i].getValue();
 	}
 	return val;
 }
@@ -17,7 +17,7 @@ const QString CardHand::toString(void) const
 	int size = this->size();
 	for ( int i = 0; i < size; ++i)
 	{
-		str += this[i].toString() + "\n";
+		str += (*this)[i].toString() + "\n";
 	}
 	return str;
 }
