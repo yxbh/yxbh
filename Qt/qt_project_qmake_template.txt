@@ -1,16 +1,15 @@
 TEMPLATE = app
-QT += widgets
+CONFIG += qt
 CONFIG += console
-
-#CONFIG = console
+QT += core	    #default
+QT += gui	    # default
+QT += widgets # for QApplication
 
 SOURCES += \
     main.cpp
 
 HEADERS += \
     includes.h
-
-QMAKE_CXXFLAGS
 
 win32-msvc2010 {
     # Enable Level 4 compiler warning
@@ -19,6 +18,7 @@ win32-msvc2010 {
     # Treat warnings as errors
     QMAKE_CXXFLAGS_WARN_ON += -WX
     # Enable static (no DLL requirement)
+    QMAKE_CXXFLAGS_RELEASE -= -MD
     QMAKE_CXXFLAGS_RELEASE += -MT
     # Hush common known Qt warning
     # reference: http://qt-project.org/forums/viewthread/10527
