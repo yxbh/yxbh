@@ -10,6 +10,8 @@ SOURCES += \
 HEADERS += \
     includes.h
 
+QMAKE_CXXFLAGS
+
 win32-msvc2010 {
     # Enable Level 4 compiler warning
     QMAKE_CXXFLAGS_WARN_ON -= -W3
@@ -27,6 +29,8 @@ win32-msvc2010 {
     # classify warning as errors
     QMAKE_CXXFLAGS += -Werror
     # pedantic
-    QMAKE_CXXFLAGS += -Pedantic
+    QMAKE_CXXFLAGS += -pedantic
+    # enable C++11
+    QMAKE_CXXFLAGS += -std=c++11
 }
 
