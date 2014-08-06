@@ -1,4 +1,0 @@
-
- - finish InputProcessor class (use stream instead of getline).
-	- implement into CfK & Chopper.
- - rewrite Encryption class to use a portable RNG
