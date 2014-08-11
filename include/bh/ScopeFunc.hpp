@@ -56,5 +56,5 @@ ScopeFunc<Functor_T...> makeScopeFunc(Functor_T && ... p_rrFunctor)
 
 } // BH ns
 
-#define MakeScopeFunc(...) auto MAKE_UNIQUE_NAME() = makeScopeFunc(__VA_ARGS__);
+#define MakeScopeFunc(...) auto MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
 #define BH_MakeScopeFunc(...) MakeScopeFunc(__VA_ARGS__);
