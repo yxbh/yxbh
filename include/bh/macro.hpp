@@ -1,7 +1,7 @@
 #pragma once
 
 /// remove unused parameter warning.
-#define UNUSED_PARAMETER(X) void(0);
+#define UNUSED_PARAMETER(X) (void)X;
 #define BH_UNUSED(X) UNUSED_PARAMETER(X)
 #define BH_UNUSED_PARAMETER(X) UNUSED_PARAMETER(X)
 
