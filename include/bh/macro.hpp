@@ -15,9 +15,9 @@
 #define CONCATENATE(x, y) CONCATENATE_DETAIL(x, y)
 /// @return an unique name base on the given 'variable' name by concatenating __COUNTER__.
 #define MAKE_UNIQUE_NAME_WITH(x) CONCATENATE(x, __COUNTER__)
-/// @return an unique name which is constructed by concatenating __FUNCTION__, __LINE__ and __COUNTER__ together.
-#define MAKE_UNIQUE_NAME() CONCATENATE(__FUNCTION__, CONCATENATE(__LINE__, __COUNTER__))
+/// @return an unique name which is constructed by concatenating 'UNIQUE_VAR_NAME' and __COUNTER__ together.
+#define MAKE_UNIQUE_NAME() CONCATENATE(UNIQUE_VAR_NAME_, __COUNTER__)
 /// @return an unique name base on the given 'variable' name by concatenating __COUNTER__.
 #define BH_MAKE_UNIQUE_NAME_WITH(x) CONCATENATE(x, __COUNTER__)
-/// @return an unique name which is constructed by concatenating __FUNCTION__, __LINE__ and __COUNTER__ together.
-#define BH_MAKE_UNIQUE_NAME() CONCATENATE(__FUNCTION__, CONCATENATE(__LINE__, __COUNTER__))
+/// @return an unique name which is constructed by concatenating 'UNIQUE_VAR_NAME' and __COUNTER__ together.
+#define BH_MAKE_UNIQUE_NAME() CONCATENATE(UNIQUE_VAR_NAME_, __COUNTER__)
