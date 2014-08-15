@@ -7,7 +7,7 @@
 namespace bh
 {
 
-namespace detail
+namespace impl
 {
 
 template<typename ... T> class ScopeFuncImpl;
@@ -28,7 +28,7 @@ public:
     ~ScopeFuncImpl(void) { m_Functor(); }
 }; // ScopeFuncImpl
 
-} // detail ns
+} // impl ns
 
 /**
  * \class ScopeFunc
@@ -37,10 +37,10 @@ public:
 */
 template<typename ... Functor_T>
 class ScopeFunc
-    : private detail::ScopeFuncImpl<Functor_T...>
+    : private impl::ScopeFuncImpl<Functor_T...>
 {
 private:
-    using BaseType = detail::ScopeFuncImpl<Functor_T...>;
+    using BaseType = impl::ScopeFuncImpl<Functor_T...>;
 
 public:
     ScopeFunc(Functor_T && ... p_Functors)
@@ -56,5 +56,12 @@ ScopeFunc<Functor_T...> makeScopeFunc(Functor_T && ... p_rrFunctor)
 
 } // BH ns
 
-#define MakeScopeFunc(...) auto MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
-#define BH_MakeScopeFunc(...) MakeScopeFunc(__VA_ARGS__);
+/**
+ * Create a named ScopeFunc object.
+ */
+#define MakeNamedScopeFunc(...) auto MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
+/**
+ * Create a named ScopeFunc object.
+ * \see MakeNamedScopeFunc.
+ */
+#define BH_MakeNamedScopeFunc(...) MakeNamedScopeFunc(__VA_ARGS__);
