@@ -75,7 +75,8 @@ DEPENDPATH += $$PWD/../../../boost_1_55_0/stage
 
 SOURCES += \
     ../main.cpp \
-    ../test_macros.cpp
+    ../test_macros.cpp \
+    ../test_ScopeFunc.cpp
 
 HEADERS  += \
 
