@@ -4,9 +4,9 @@
 #include <memory>
 
 /**
- * \class Singleton
- * A utility class utilising the Curiously Recurring Template Pattern for implementing classes
- * that exists only as a global singleton object.
+ * @class Singleton
+ * @brief A utility class utilising the Curiously Recurring Template Pattern
+ * for implementing classes that exists only as a global singleton object.
 */
 template<class T>
 class Singleton
@@ -17,16 +17,16 @@ protected:
 public:
     /**
      * @return raw pointer to the singleton object instance.
-	 */
+     */
     static T * getSingleton(void)
-	{
-		assert(s_upSingletonInstance);
-		return s_upSingletonInstance.get();
-	}
+    {
+        assert(s_upSingletonInstance);
+        return s_upSingletonInstance.get();
+    }
 
     /**
-	 * Set the single instance to \a instance. Ownership is transferred.
-	 */
+     * Set the single instance to \a instance. Ownership is transferred.
+     */
     static void setSingleton(T * instance)
     {
         assert(instance != s_upSingletonInstance.get());
