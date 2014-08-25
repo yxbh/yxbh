@@ -10,8 +10,11 @@ namespace bh
 namespace impl
 {
 
+/** @brief ScopeFunc implementation impl. */
 template<typename ... T> class ScopeFuncImpl;
+/** @brief ScopeFunc implementation impl. */
 template<> class ScopeFuncImpl<> {};
+/** @brief ScopeFunc implementation impl. */
 template<typename First_T, typename ... Rest_T>
 class ScopeFuncImpl<First_T, Rest_T...>
     : private ScopeFuncImpl<Rest_T...>
@@ -31,8 +34,8 @@ public:
 } // impl ns
 
 /**
- * \class ScopeFunc
- * A RAII class that takes an arbitrary number of functor objects, executing the objects' operator()
+ * @class ScopeFunc
+ * @brief A RAII class that takes a single functor object, executing the object's operator()
  * in the ScopeFunc object's destructor when the ScopeFunc object is destroyed.
 */
 template<typename ... Functor_T>
@@ -47,21 +50,33 @@ public:
         : BaseType(std::forward<Functor_T>(p_Functors)...) {}
 };
 
-
+/**
+ * Utility function for creating a ScopeFunc object with an arbitrary amount of functors.
+ *
+ * Sample usuage:
+ * @code
+ *      auto scope_func = makeScopeFunc([](void){ std::cout << "end of scope" << std::endl; });
+ * @endcode
+ * @return a ScopeFunc object.
+*/
 template<typename ... Functor_T>
 ScopeFunc<Functor_T...> makeScopeFunc(Functor_T && ... p_rrFunctor)
 {
     return ScopeFunc<Functor_T...>(std::forward<Functor_T>(p_rrFunctor) ... );
 }
 
-} // BH ns
+} // bh ns
 
 /**
- * Create a named ScopeFunc object.
- */
-#define MakeNamedScopeFunc(...) auto MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
-/**
- * Create a named ScopeFunc object.
- * \see MakeNamedScopeFunc.
- */
-#define BH_MakeNamedScopeFunc(...) MakeNamedScopeFunc(__VA_ARGS__);
+ * Utility macro function for creating a ScopeFunc object with an arbitrary amount of functors.
+ * This function takes care of creating the ScopeFunc object for you so you don't declare one.
+ * makeScopeFunc is used internally.
+ *
+ * Sample usuage:
+ * @code
+ *      MakeScopeFunc([](void){ std::cout << "end of scope" << std::endl; });
+ * @endcode
+ * @return a ScopeFunc object.
+*/
+#define MakeScopeFunc(...) auto MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
+#define BH_MakeScopeFunc(...) auto BH_MAKE_UNIQUE_NAME() = bh::makeScopeFunc(__VA_ARGS__);
