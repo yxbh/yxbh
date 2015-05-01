@@ -1,4 +1,4 @@
-Copyright (c) 2015,  Benjamin
+Copyright (c) 2015,  Benjamin YanXiang Huang
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
