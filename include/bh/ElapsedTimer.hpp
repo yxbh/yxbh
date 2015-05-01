@@ -32,6 +32,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 #include <type_traits>
 
+namespace bh
+{
+
 /**
  * @class ElapsedTimer
  * @brief
@@ -74,4 +77,6 @@ public:
         m_BeforeTP = ClockType::now();
         m_Duration = DurationType(0);
     }
-};
+}; // ElapsedTimer class
+
+} // bh namespace
